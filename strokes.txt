@@ -1,0 +1,83 @@
+### Open Settings
+Key pressed: windows  Wait: 0.25
+Key pressed: e  Wait: 0.1
+Key pressed: m  Wait: 0.1
+Key pressed: a  Wait: 0.1
+Key pressed: i  Wait: 0.1
+Key pressed: l  Wait: 0.1
+Key pressed: space  Wait: 0.1
+Key pressed: a  Wait: 0.1
+Key pressed: n  Wait: 0.1
+Key pressed: d  Wait: 0.1
+Key pressed: space  Wait: 0.1
+Key pressed: a  Wait: 0.1
+Key pressed: c  Wait: 0.1
+Key pressed: c  Wait: 0.1
+Key pressed: o  Wait: 0.1
+Key pressed: u  Wait: 0.1
+Key pressed: n  Wait: 0.1
+Key pressed: t  Wait: 0.1
+Key pressed: s  Wait: 0.1
+Key pressed: enter  Wait: 2.0
+
+### Open Add Account
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: enter  
+Wait: Click
+
+### Create New Account
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: enter
+Wait: Click
+
+### Create New Email
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: enter
+Wait: Click
+
+### Type Email
+Key pressed: tab  Wait: 0.1
+Key pressed: randomCharacters: 9 Wait: 0.1
+Key pressed: enter
+Wait: Click
+
+### Type Password
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: randomCharacters: 9  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: enter
+Key pressed: tab  Wait: 0.1
+Key pressed: enter
+Wait: Click
+
+### Type First/Last Name
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: randomCharacters: 8  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: randomCharacters: 8  Wait: 0.1
+Key pressed: enter
+Wait: Click
+
+### Enter Brith Day/Month
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: down  Wait: 0.1
+Key pressed: tab  Wait: 0.1
+Key pressed: down  Wait: 0.1
+
+### Enter Birth Year (2006 to avoid age checks)
+Key pressed: tab  Wait: 0.1
+Key pressed: 2  Wait: 0.1
+Key pressed: 0  Wait: 0.1
+Key pressed: 0  Wait: 0.1
+Key pressed: 6  Wait: 0.1
+Key pressed: enter 

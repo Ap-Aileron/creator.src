@@ -1,0 +1,5 @@
+{
+    "instantStart": false, // Removes wait time on start
+    "defaultWaitTime": 0.1, // I don't recommend changing this
+    "closeSettingsOnStart": true // Closes the settings window after starting the script. Recommended to keep true
+}
