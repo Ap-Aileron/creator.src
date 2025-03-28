@@ -11,7 +11,6 @@ import json
 import os
 from colorama import init, Fore, Style
 
-# Initialize colorama
 init()
 
 def get_resource_path(relative_path):
@@ -65,7 +64,6 @@ def save_account_info(email, password, first_name, last_name):
     }
     accounts.append(account)
     
-    # Save updated accounts
     with open(accounts_file, 'w') as f:
         json.dump(accounts, f, indent=4)
 
@@ -185,20 +183,30 @@ def close_settings_app():
     return False
 
 def main():             
-    config = load_config()
-    strokes_file = get_resource_path('strokes.txt')
-    sys.stdout.write(f'{Fore.CYAN}Executing keystrokes from {strokes_file}...{Style.RESET_ALL}\n')
-    sys.stdout.flush()
-    if config.get('closeSettingsOnStart', True) and close_settings_app():
-        time.sleep(1)  
-    
-    if not config.get('instantStart', False):
-        sys.stdout.write(f'{Fore.GREEN}Starting now.{Style.RESET_ALL}\n')
-        sys.stdout.flush()     
-    
-    execute_keystrokes(strokes_file)
-    sys.stdout.write(f'{Fore.GREEN}Finished executing keystrokes. Proceed with CAPTCHA or other actions.{Style.RESET_ALL}\n')
-    sys.stdout.flush()
+    while True:
+        config = load_config()
+        strokes_file = get_resource_path('strokes.txt')
+        sys.stdout.write(f'{Fore.CYAN}Executing keystrokes from {strokes_file}...{Style.RESET_ALL}\n')
+        sys.stdout.flush()
+        if config.get('closeSettingsOnStart', True) and close_settings_app():
+            time.sleep(1)  
+        
+        if not config.get('instantStart', False):
+            sys.stdout.write(f'{Fore.GREEN}Starting now.{Style.RESET_ALL}\n')
+            sys.stdout.flush()     
+        
+        execute_keystrokes(strokes_file)
+        sys.stdout.write(f'{Fore.GREEN}Account Created. Would you like to create another one? (y/n){Style.RESET_ALL}\n')
+        sys.stdout.flush()
+        
+        response = input().lower().strip()
+        if response != 'y':
+            sys.stdout.write(f'{Fore.YELLOW}Exiting program. Goodbye!{Style.RESET_ALL}\n')
+            sys.stdout.flush()
+            break
+        
+        if close_settings_app():
+            time.sleep(1)
 
 if __name__ == '__main__':
     try:
