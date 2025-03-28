@@ -183,6 +183,8 @@ def close_settings_app():
     return False
 
 def main():             
+    sys.stdout.write(f'{Fore.CYAN}Made by pzcax for Spectrum Studios.{Style.RESET_ALL}\n')
+    sys.stdout.flush()
     while True:
         config = load_config()
         strokes_file = get_resource_path('strokes.txt')
@@ -213,4 +215,4 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         sys.stdout.write(f'\n{Fore.YELLOW}Program interrupted by user{Style.RESET_ALL}\n')
-        sys.stdout.flush()
+        sys.stdout.flush()#
