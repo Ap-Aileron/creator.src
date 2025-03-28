@@ -215,4 +215,4 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         sys.stdout.write(f'\n{Fore.YELLOW}Program interrupted by user{Style.RESET_ALL}\n')
-        sys.stdout.flush()#
+        sys.stdout.flush()
