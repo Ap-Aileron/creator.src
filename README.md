@@ -16,4 +16,4 @@ This tool automates keyboard inputs for account creation with configurable setti
 4. Make sure to click after the account creation screen has finished loading the segment or it will break.
 5. Accounts will be saved in `accounts.json`
 
-Note: The generated random strings will always start with a letter to ensure compatibility. Spectrum Studios is not responsible for any issues arising from the use of this tool. You are NOT allowed to modify for personal use, or distribute any modified version of these scripts for public or private use.
+Note: The generated random strings will always start with a letter to ensure compatibility. Spectrum Studios is not responsible for any issues arising from the use of this tool. You are NOT allowed to modify for personal use, or distribute any modified version of these scripts for public or private use. You ARE allowed to modify code to contribute to this repository.
