@@ -9,6 +9,10 @@ from threading import Event
 import psutil
 import json
 import os
+from colorama import init, Fore, Style
+
+# Initialize colorama
+init()
 
 def get_resource_path(relative_path):
     try:
@@ -50,7 +54,7 @@ def save_account_info(email, password, first_name, last_name):
             with open(accounts_file, 'r') as f:
                 accounts = json.load(f)
         except json.JSONDecodeError:
-            sys.stdout.write(f'Warning: Could not parse {accounts_file}, creating new file\n')
+            sys.stdout.write(f'{Fore.YELLOW}Warning: Could not parse {accounts_file}, creating new file{Style.RESET_ALL}\n')
             sys.stdout.flush()
     
     account = {
@@ -106,10 +110,10 @@ def execute_keystrokes(file_path):
                     if wait_time:
                         try:
                             wait_seconds = float(wait_time)
-                            print(f'Waiting {wait_seconds} seconds after Windows key')
+                            print(f'{Fore.CYAN}Waiting {wait_seconds} seconds after Windows key{Style.RESET_ALL}')
                             time.sleep(wait_seconds)
                         except ValueError:
-                            print(f'Invalid wait time: {wait_time}, continuing...')
+                            print(f'{Fore.YELLOW}Invalid wait time: {wait_time}, continuing...{Style.RESET_ALL}')
                 elif 'randomCharacters' in key:
                     length = 8  
                     if ':' in key:
@@ -119,7 +123,7 @@ def execute_keystrokes(file_path):
                             pass
                     random_text = generate_random_characters(length)
                     keyboard.write(random_text)
-                    print(f'Typed random characters: {random_text}')
+                    print(f'{Fore.GREEN}Typed random characters: {random_text}{Style.RESET_ALL}')
 
                     if account_info['email'] == '':
                         account_info['email'] = random_text
@@ -133,10 +137,10 @@ def execute_keystrokes(file_path):
                                         account_info['first_name'], account_info['last_name'])
                 else:
                     keyboard.press_and_release(key)
-                    print(f'Pressed {key}')
+                    print(f'{Fore.CYAN}Pressed {key}{Style.RESET_ALL}')
                 
                 if wait_time.lower() == 'click':
-                    print('Please click your mouse when the loading screen has finished.')
+                    print(f'{Fore.YELLOW}Please click your mouse when the loading screen has finished.{Style.RESET_ALL}')
                     click_event = Event()
                     def on_click(x, y, button, pressed):
                         if pressed:
@@ -145,26 +149,26 @@ def execute_keystrokes(file_path):
                     with mouse.Listener(on_click=on_click) as listener:
                         click_event.wait()
                         listener.join()
-                    print('Click detected, continuing...')
+                    print(f'{Fore.GREEN}Click detected, continuing...{Style.RESET_ALL}')
                 elif wait_time:
                     try:
                         wait_seconds = float(wait_time)
-                        print(f'Waiting {wait_seconds} seconds')
+                        print(f'{Fore.CYAN}Waiting {wait_seconds} seconds{Style.RESET_ALL}')
                         time.sleep(wait_seconds)
                     except ValueError:
-                        print(f'Invalid wait time: {wait_time}, continuing...')
+                        print(f'{Fore.YELLOW}Invalid wait time: {wait_time}, continuing...{Style.RESET_ALL}')
                 
                 i += 1 
     except FileNotFoundError:
-        sys.stdout.write(f'Error: File {file_path} not found\n')
+        sys.stdout.write(f'{Fore.RED}Error: File {file_path} not found{Style.RESET_ALL}\n')
         sys.stdout.flush()
         sys.exit(1)
     except Exception as e:
         if 'is not a valid key' in str(e):
-            print(f'Error: Unsupported key - {e}')
+            print(f'{Fore.RED}Error: Unsupported key - {e}{Style.RESET_ALL}')  
             sys.exit(1)
     except Exception as e:
-        print(f'An error occurred: {e}')
+        print(f'{Fore.RED}An error occurred: {e}{Style.RESET_ALL}')
         sys.exit(1)
 
 def close_settings_app():
@@ -173,7 +177,7 @@ def close_settings_app():
             if proc.info['name'].lower() == 'systemsettings.exe':
                 proc.terminate()
                 proc.wait(timeout=3)
-                sys.stdout.write('Settings app closed successfully\n')
+                sys.stdout.write(f'{Fore.GREEN}Settings app closed successfully{Style.RESET_ALL}\n')
                 sys.stdout.flush()
                 return True
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.TimeoutExpired):
@@ -183,22 +187,22 @@ def close_settings_app():
 def main():             
     config = load_config()
     strokes_file = get_resource_path('strokes.txt')
-    sys.stdout.write(f'Executing keystrokes from {strokes_file}...\n')
+    sys.stdout.write(f'{Fore.CYAN}Executing keystrokes from {strokes_file}...{Style.RESET_ALL}\n')
     sys.stdout.flush()
     if config.get('closeSettingsOnStart', True) and close_settings_app():
         time.sleep(1)  
     
     if not config.get('instantStart', False):
-        sys.stdout.write('Starting now.\n')
+        sys.stdout.write(f'{Fore.GREEN}Starting now.{Style.RESET_ALL}\n')
         sys.stdout.flush()     
     
     execute_keystrokes(strokes_file)
-    sys.stdout.write('Finished executing keystrokes. Proceed with CAPTCHA or other actions.\n')
+    sys.stdout.write(f'{Fore.GREEN}Finished executing keystrokes. Proceed with CAPTCHA or other actions.{Style.RESET_ALL}\n')
     sys.stdout.flush()
 
 if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        sys.stdout.write('\nProgram interrupted by user\n')
+        sys.stdout.write(f'\n{Fore.YELLOW}Program interrupted by user{Style.RESET_ALL}\n')
         sys.stdout.flush()
